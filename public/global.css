@@ -32,7 +32,7 @@
 	--tag-yellow: #f9f871;
 	--tag-green: #00b995;
 
-	--task-green: linear-gradient(to bottom, #348a4b, #00ff87);
+	--task-green: linear-gradient(to bottom, #00b55c, #00ff87);
 	--task-red: linear-gradient(to bottom, #dd2251, #ff512f);
 
 	--red: #dd2251;
@@ -61,6 +61,7 @@ body {
 #root > * {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
 
 #root > *:not(:last-child) {
@@ -108,4 +109,8 @@ textarea {
 	resize: vertical;
 	padding: 8px;
 	flex-shrink: 0;
+}
+
+header {
+	padding-left: 16px;
 }
