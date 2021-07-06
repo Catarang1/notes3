@@ -8,12 +8,19 @@ class Task extends Component {
 	isDone() {
 		return this.props.task.steps.every( step => step.done )
 	}
-
+	countDoneSteps() {
+		return this.props.task.steps.filter(step => step.done).length
+	}
+	countAllSteps() {
+		return this.props.task.steps.length
+	}
+	calcDash() {
+		return (this.countDoneSteps() / this.countAllSteps() * 50) + " 1000"
+	}
 	adjustSize(textarea) {
 		textarea.style.height = 'auto'
 		textarea.style.height = (textarea.scrollHeight) + "px"
 	}
-
 	render() {
 		const {task} = this.props
 
@@ -25,7 +32,7 @@ class Task extends Component {
 							<GripIco />
 							<svg className="progressCircle" viewBox="0 0 24 24">
 								<circle r="8" cx="12" cy="12"stroke="var(--tab-bg)" strokeWidth="8" fill="none"></circle>
-								<circle r="8" cx="12" cy="12" className="progress" fill="none" stroke={'red'} strokeWidth="4" strokeLinecap="round" strokeDasharray='10 1000'></circle>
+								<circle r="8" cx="12" cy="12" className="progress" fill="none" stroke={this.isDone() ? "var(--green)" : "var(--red)"} strokeWidth="4" strokeLinecap="round" strokeDasharray={this.calcDash()}></circle>
 							</svg>
 							<div className="spacer"></div>
 							<button><AddTaskIco /></button>

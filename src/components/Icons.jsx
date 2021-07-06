@@ -71,15 +71,4 @@ const PaletteIco = ({color}) => {
 	 );
 }
 
-export {
-	AddProjectIco,
-	AddTaskIco,
-	DeleteIco,
-	EditIco,
-	GripIco,
-	Tag,
-	CheckIco,
-	AddPeopleIco,
-	RemovePersonIco,
-	PaletteIco,
-};
+export { AddProjectIco, AddTaskIco, DeleteIco, EditIco, GripIco, Tag, CheckIco, AddPeopleIco, RemovePersonIco, PaletteIco };

@@ -11,7 +11,7 @@ nav > button {
 }
 
 nav .description {
-	display: none;
+	/* display: none; */
 }
 
 nav > button > svg {
@@ -26,6 +26,7 @@ nav > button > * {
 	width: 100%;
 	flex-grow: 1;
 	overflow: scroll hidden;
+	padding-bottom: 8px;
 }
 
 .task {

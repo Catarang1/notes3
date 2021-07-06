@@ -5,9 +5,9 @@ import data from './data'
 import './App.css';
 
 /* components */
-import Header from './components/Header'
-import ActionBar from './components/ActionBar'
-import ProjectView from './components/ProjectView'
+import Header from './components/Header.jsx'
+import ActionBar from './components/ActionBar.jsx'
+import ProjectView from './components/ProjectView.jsx'
 
 class App extends Component {
 	state = { ...data }
