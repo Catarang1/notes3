@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
+header > *:not(:last-child) {
+	margin-right: 16px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+nav > button {
+	padding: 8px 0px 8px 8px;
+	background-color: var(--tab-bg);
+	border-radius: 6px;
+	margin-right: 16px;
+	border: 2px solid var(--purple);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+nav .description {
+	display: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+nav > button > svg {
+	height: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+nav > button > * {
+	margin-right: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#projectView {
+	width: 100%;
+	flex-grow: 1;
+	overflow: scroll hidden;
+}
+
+.task {
+	width: 280px;
+	height: 100%;
+	background-color: var(--purple);
+	padding: 2px;
+	margin-right: 16px;
+	border-radius: 6px;
+}
+.task.red {background: var(--task-red);}
+.task.green {background: var(--task-green);}
+
+.task.red .steps::-webkit-scrollbar-thumb {background-color: var(--red);}
+.task.red .steps {scrollbar-color: var(--red) var(--dark-bg);}
+.task.green .steps::-webkit-scrollbar-thumb {background-color: var(--green)}
+.task.green .steps {scrollbar-color: var(--green) var(--dark-bg);}
+
+.task > .content {
+	height: 100%;
+	background-color: var(--tab-bg);
+	border-radius: 6px;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+}
+
+.task button {
+	background: none;
+}
+
+.task svg {
+	height: 22px;
+}
+
+.task .block {
+	border-radius: 6px;
+	background-color: var(--dark-bg);
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+	min-height: 40px;
+}
+
+.block textarea {color: var(--purple-light)}
+
+.task > .content > *:not(:last-child) {
+	margin-bottom: 8px;
+}
+
+.task .row {
+	display: flex;
+	align-items: center;
+}
+
+.row > *:not(:last-child) {
+	margin-right: 4px;
+}
+
+.row > .spacer {
+	margin-left: auto
+}
+
+.steps {
+	overflow-y: auto;
+	padding-right: 8px;
+}
+
+.steps > .step:not(:last-child) {
+	margin-bottom: 8px;
+}
+
+.block > .row:not(:last-child) {
+	margin-bottom: 8px;
+}
+
+.taskName {
+	height: calc(var(--std-font) + 22px);
 }
