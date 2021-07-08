@@ -8,6 +8,14 @@ nav > button {
 	border-radius: 6px;
 	margin-right: 16px;
 	border: 2px solid var(--purple);
+	transition-property: box-shadow border-color;
+	transition: .1s ease-in-out;
+	font-size: var(--std-font);
+}
+
+nav > button:hover {
+	border-color: var(--purple-light);
+	box-shadow: 0 0 40px var(--purple-dark);
 }
 
 nav .description {
@@ -20,6 +28,7 @@ nav > button > svg {
 
 nav > button > * {
 	margin-right: 8px;
+	text-transform: capitalize;
 }
 
 #projectView {
@@ -36,6 +45,7 @@ nav > button > * {
 	padding: 2px;
 	margin-right: 16px;
 	border-radius: 6px;
+	flex-shrink: 0;
 }
 .task.red {background: var(--task-red);}
 .task.green {background: var(--task-green);}

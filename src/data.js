@@ -2,7 +2,7 @@ const data = {
 	projects: [
 		{
 			name: "one",
-			ID: "AAAB-0001",
+			id: "AAAB-0001",
 			icon: "boat",
 			dateCreated: "1.1.2001",
 			owner: 'Ian',
@@ -91,7 +91,7 @@ const data = {
 			]
 		}, {
 			name: "second",
-			ID: "AAAB-0002",
+			id: "AAAB-0002",
 			icon: "boat",
 			dateCreated: "1.1.2001",
 			owner: 'Ian',

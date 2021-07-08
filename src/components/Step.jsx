@@ -28,8 +28,7 @@ class Step extends Component {
 				<textarea onKeyDown={ (e)=> this.adjustSize(e.target) } spellCheck={false} defaultValue={step.name} ></textarea>
 			</div>
 		</div>
-	 );
-	}
+	);}
 }
 
 export default Step;

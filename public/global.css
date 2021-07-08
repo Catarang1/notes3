@@ -106,7 +106,7 @@ textarea {
 	background-color: transparent;
 	font-size: var(--std-font);
 	width: 100%;
-	resize: vertical;
+	resize: none;
 	padding: 8px;
 	flex-shrink: 0;
 }
