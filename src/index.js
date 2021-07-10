@@ -47,7 +47,7 @@ class App extends Component {
 		let projectID = argArray[0]
 		let taskID = argArray[1]
 		let stepID = argArray[2]
-		console.log(projectID, taskID, stepID);
+		console.log(argArray);
 
 		switch(request) {
 
@@ -55,12 +55,69 @@ class App extends Component {
 				this.setState(produce(this.state, draftState => {
 					let stepReference = draftState
 						.projects.find(p => p.id === projectID)
-							.tasks.find(task => task.id === taskID)
-								.steps.find(step => step.id === stepID)
+							.tasks.find(task => task.id === `${projectID}:${taskID}`)
+								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
 					stepReference.done = !stepReference.done
 				}))
 				break;
 			}
+
+			case Request.STEP_TAG_TOGGLE_PURPLE: {
+				this.setState(produce(this.state, draftState => {
+					let stepReference = draftState
+						.projects.find(p => p.id === projectID)
+							.tasks.find(task => task.id === `${projectID}:${taskID}`)
+								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
+					stepReference.TAG_PRP = !stepReference.TAG_PRP
+				}))
+				break;
+			}
+
+			case Request.STEP_TAG_TOGGLE_PINK: {
+				this.setState(produce(this.state, draftState => {
+					let stepReference = draftState
+						.projects.find(p => p.id === projectID)
+							.tasks.find(task => task.id === `${projectID}:${taskID}`)
+								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
+					stepReference.TAG_PNK = !stepReference.TAG_PNK
+				}))
+				break;
+			}
+
+			case Request.STEP_TAG_TOGGLE_ORANGE: {
+				this.setState(produce(this.state, draftState => {
+					let stepReference = draftState
+						.projects.find(p => p.id === projectID)
+							.tasks.find(task => task.id === `${projectID}:${taskID}`)
+								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
+					stepReference.TAG_ORG = !stepReference.TAG_ORG
+				}))
+				break;
+			}
+
+			case Request.STEP_TAG_TOGGLE_YELLOW: {
+				this.setState(produce(this.state, draftState => {
+					let stepReference = draftState
+						.projects.find(p => p.id === projectID)
+							.tasks.find(task => task.id === `${projectID}:${taskID}`)
+								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
+					stepReference.TAG_YLL = !stepReference.TAG_YLL
+				}))
+				break;
+			}
+
+			case Request.STEP_TAG_TOGGLE_GREEN: {
+				this.setState(produce(this.state, draftState => {
+					let stepReference = draftState
+						.projects.find(p => p.id === projectID)
+							.tasks.find(task => task.id === `${projectID}:${taskID}`)
+								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
+					stepReference.TAG_GRN = !stepReference.TAG_GRN
+				}))
+				break;
+			}
+
+
 
 			/* Other request types */
 

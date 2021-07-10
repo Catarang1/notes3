@@ -116,3 +116,8 @@ nav > button > * {
 .taskName {
 	height: calc(var(--std-font) + 22px);
 }
+
+.progress {
+	transition-property: stroke-dasharray;
+	transition: 0.2s linear;
+}
