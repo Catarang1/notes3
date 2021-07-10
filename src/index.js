@@ -15,25 +15,26 @@ import Request from './Requests'
 class App extends Component {
 	state = { ...data }
 
+	genIdString = (length = 5) => Math.random().toString(16).substr(2, length)
+
 	// mock up IDs unique towards arrays
 	componentDidMount() {
-		let idLength = 5
 		this.state.projects.forEach(project => {
-			let newProjectID = Math.random().toString(16).substr(2, idLength)
+			let newProjectID = this.genIdString()
 			while (this.state.projects.map(p => p.id).includes(newProjectID)) {
-				newProjectID = Math.random().toString(16).substr(2, idLength)
+				newProjectID = this.genIdString()
 			}
 			project.id = newProjectID
 			project.tasks.forEach(task => {
-				let newTaskID = Math.random().toString(16).substr(2, idLength)
+				let newTaskID = this.genIdString()
 				while (project.tasks.map(t => t.id).includes(newTaskID)) {
-					newTaskID = Math.random().toString(16).substr(2, idLength)
+					newTaskID = this.genIdString()
 				}
 				task.id = `${newProjectID}:${newTaskID}`
 				task.steps.forEach(step => {
-					let newStepID = Math.random().toString(16).substr(2, idLength)
+					let newStepID = this.genIdString()
 					while (task.steps.map(s => s.id).includes(newStepID)) {
-						newStepID = Math.random().toString(16).substr(2, idLength)
+						newStepID = this.genIdString()
 					}
 					step.id = `${newProjectID}:${newTaskID}:${newStepID}`
 				})

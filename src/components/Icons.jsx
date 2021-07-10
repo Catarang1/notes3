@@ -32,7 +32,7 @@ const GripIco = ({color}) => {
 const Tag = ({color, selected}) => {
 	return (
 		<svg className="tag" width="18" height="24">
-			<circle className="outer" r="6" cx="10" cy="12" stroke="white" fill="var(--tab-bg)" fillRule="evenodd" strokeWidth={selected ? 1 : 0} ></circle>
+			<circle className="outer" r="7" cx="10" cy="12" stroke="white" fill="var(--tab-bg)" fillRule="evenodd" strokeWidth={selected ? 2 : 0} ></circle>
 			<circle className="inner" r="4" cx="10" cy="12" stroke="white" fill={('var(--'+ color +')') || "white"} fillRule="evenodd" strokeWidth="0" ></circle>
 		</svg>
 	);
