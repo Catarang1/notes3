@@ -53,8 +53,11 @@ class App extends Component {
 
 			case Request.STEP_TOGGLE: {
 				this.setState(produce(this.state, draftState => {
-					let project = draftState.projects.find(p => p.id === projectID)
-					console.log(project);
+					let stepReference = draftState
+						.projects.find(p => p.id === projectID)
+							.tasks.find(task => task.id === taskID)
+								.steps.find(step => step.id === stepID)
+					stepReference.done = !stepReference.done
 				}))
 				break;
 			}
