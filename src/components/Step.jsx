@@ -1,4 +1,5 @@
 import { DeleteIco, EditIco, GripIco, Tag, CheckIco } from "./Icons";
+import Request from '../Requests'
 import React, { Component } from 'react';
 
 class Step extends Component {
@@ -9,7 +10,7 @@ class Step extends Component {
 	}
 
 	render() {
-		const {step} = this.props
+		const {step, handle} = this.props
 		return (
 		<div className="step">
 			<div className="block">
@@ -21,7 +22,7 @@ class Step extends Component {
 					<button><Tag color="tag-yellow" selected={step.TAG_YLL}/></button>
 					<button><Tag color="tag-green" selected={step.TAG_GRN}/></button>
 					<div className="spacer"></div>
-					<CheckIco color="var(--purple-light)" selected={step.done}/>
+					<button onClick={() => handle(Request.STEP_TOGGLE, step.id)}><CheckIco color="var(--purple-light)" selected={step.done}/></button>
 					<EditIco color="var(--purple-light)" />
 					<DeleteIco color="var(--purple-light)" />
 				</div>

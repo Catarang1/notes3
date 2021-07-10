@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+import produce from "immer"
 import data from './data'
 import './App.css';
 
@@ -9,23 +10,12 @@ import Header from './components/Header.jsx'
 import ActionBar from './components/ActionBar.jsx'
 import ProjectView from './components/ProjectView.jsx'
 
-/* const AppItem = {
-	PROJECT: 0,
-	TASK: 1,
-	STEP: 2,
-}; */
-
-// mock ID modify length on demand missing const variable!
-// gluing 3 ID strings isnt most ideal solution
-
-// :TODO: extract IDlen to separate var to class scope
-// if class scope req constuctor, keep let in fx with default vaiable input
-
+import Request from './Requests'
 
 class App extends Component {
 	state = { ...data }
 
-	// mock IDs
+	// mock up IDs unique towards arrays
 	componentDidMount() {
 		let idLength = 5
 		this.state.projects.forEach(project => {
@@ -47,9 +37,32 @@ class App extends Component {
 					}
 					step.id = `${newProjectID}:${newTaskID}:${newStepID}`
 				})
-
 			})
 		})
+	}
+
+	handle = (request, argString) => {
+		// parse args
+		let argArray = argString.split(':')
+		let projectID = argArray[0]
+		let taskID = argArray[1]
+		let stepID = argArray[2]
+		console.log(projectID, taskID, stepID);
+
+		switch(request) {
+
+			case Request.STEP_TOGGLE: {
+				this.setState(produce(this.state, draftState => {
+					let project = draftState.projects.find(p => p.id === projectID)
+					console.log(project);
+				}))
+				break;
+			}
+
+			/* Other request types */
+
+			default: break;
+		}
 	}
 
 	render() {
@@ -57,7 +70,7 @@ class App extends Component {
 		<>
 			<Header projects={this.state.projects}/>
 			<ActionBar />
-			<ProjectView tasks={this.state.projects[0].tasks}/>
+			<ProjectView tasks={this.state.projects[0].tasks}  handle={this.handle} />
 		</>
 		)
 	}

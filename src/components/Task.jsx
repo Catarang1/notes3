@@ -22,7 +22,7 @@ class Task extends Component {
 		textarea.style.height = (textarea.scrollHeight) + "px"
 	}
 	render() {
-		const {task} = this.props
+		const {task, handle} = this.props
 
 		return (
 			<div className={"task " + (this.isDone() ? "green" : "red")}>
@@ -42,7 +42,7 @@ class Task extends Component {
 					</div>
 					<textarea spellCheck={false} onKeyDown={ (e)=> this.adjustSize(e.target) } className="taskName" defaultValue={task.name}></textarea>
 					<div className="steps">
-						{task.steps.map((step, i) => <Step key={i} step={step} />)}
+						{task.steps.map((step, i) => <Step key={i} step={step} handle={handle} />)}
 					</div>
 				</div>
 			</div>
