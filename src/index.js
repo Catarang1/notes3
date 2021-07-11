@@ -15,7 +15,7 @@ import Request from './Requests'
 class App extends Component {
 	state = { ...data }
 
-	genIdString = (length = 5) => Math.random().toString(16).substr(2, length)
+	genIdString = (length=5) => Math.random().toString(16).substr(2, length)
 
 	// mock up IDs unique towards arrays
 	componentDidMount() {
@@ -42,9 +42,9 @@ class App extends Component {
 		})
 	}
 
-	handle = (request, argString) => {
+	handle = (request, idString, textString) => {
 		// parse args
-		let argArray = argString.split(':')
+		let argArray = idString.split(':')
 		let projectID = argArray[0]
 		let taskID = argArray[1]
 		let stepID = argArray[2]
