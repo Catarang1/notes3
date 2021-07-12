@@ -105,9 +105,9 @@ class App extends Component {
 					break;
 				}
 				case Request.STEP_DELETE: {
-					
+					break
 				}
-				case Request.STEP_RENAME: stepRef.name = textString break;
+				case Request.STEP_RENAME: stepRef.name = textString; break;
 				case Request.STEP_TOGGLE: stepRef.done = !stepRef.done; break
 				case Request.STEP_TAG_TOGGLE_PURPLE: stepRef.TAG_PRP = !stepRef.TAG_PRP; break
 				case Request.STEP_TAG_TOGGLE_PINK: stepRef.TAG_PNK = !stepRef.TAG_PNK; break
