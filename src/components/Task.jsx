@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Step from './Step.jsx'
+import Request from '../Requests'
 
 import { AddTaskIco, DeleteIco, EditIco, GripIco } from "./Icons";
 
@@ -35,7 +36,7 @@ class Task extends Component {
 								<circle r="8" cx="12" cy="12" className="progress" fill="none" stroke={this.isDone() ? "var(--green)" : "var(--red)"} strokeWidth="4" strokeLinecap="round" strokeDasharray={this.calcDash()}></circle>
 							</svg>
 							<div className="spacer"></div>
-							<button><AddTaskIco /></button>
+							<button onClick={() => handle(Request.STEP_ADD, task.id, undefined)}><AddTaskIco /></button>
 							<button><EditIco /></button>
 							<button><DeleteIco /></button>
 						</div>

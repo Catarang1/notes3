@@ -23,10 +23,15 @@ class Step extends Component {
 					<button onClick={() => handle(Request.STEP_TAG_TOGGLE_GREEN, step.id)}><Tag color="tag-green" selected={step.TAG_GRN}/></button>
 					<div className="spacer"></div>
 					<button onClick={() => handle(Request.STEP_TOGGLE, step.id)}><CheckIco color="var(--purple-light)" selected={step.done}/></button>
-					<EditIco color="var(--purple-light)" />
-					<DeleteIco color="var(--purple-light)" />
+					<button onClick={() => handle(Request.STEP_RENAME, step.id)}><EditIco color="var(--purple-light)" /></button>
+					<button onClick={() => handle(Request.STEP_DELETE, step.id)}><DeleteIco color="var(--purple-light)" /></button>
 				</div>
-				<textarea onKeyDown={ (e)=> this.adjustSize(e.target) } spellCheck={false} defaultValue={step.name} ></textarea>
+				<textarea
+					onBlur={(e) => this.adjustSize(e.target)}
+					onChange={(e) => handle(Request.STEP_RENAME, step.id, e.target.value)}
+					spellCheck={false}
+					defaultValue={step.name} >
+				</textarea>
 			</div>
 		</div>
 	);}

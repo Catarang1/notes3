@@ -121,3 +121,39 @@ nav > button > * {
 	transition-property: stroke-dasharray;
 	transition: 0.2s linear;
 }
+
+#inputQuery {
+	position: absolute;
+	top: 50%; left: 50%;
+	font-size: 4rem;
+	/* font-weight: bold; */
+	background-color: var(--tab-bg);
+	border: none;
+	outline: 0;
+	border-bottom: 4px solid var(--purple);
+	padding: 20px 40px;
+	box-shadow: 0 0 50px black, 0 0 20px rgba(0, 0, 0, 0.1) inset;
+	border-radius: 6px;
+	width: 40%;
+	background-position: top 50% right 30px;
+	background-size: auto 50%;
+	background-repeat: no-repeat;
+	transform: translate(-50%, -50%) scaleY(1) scaleX(1);
+	transform-origin: center;
+	opacity: 1;
+	transition-property: transform opacity;
+	transition: .2s ease-in-out;
+}
+
+#inputQuery.hidden {
+	transform: translate(-50%, -50%) scaleY(0) scaleX(0);
+	opacity: 0;
+}
+
+#inputQuery:placeholder-shown { background-image: url(./assets/inputBG.svg); }
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+#inputQuery::placeholder { color: var(--purple-light); opacity: 1; /* Firefox */ }
+/* Internet Explorer 10-11 */
+#inputQuery:-ms-input-placeholder { color: var(--purple-light); }
+/* Microsoft Edge */
+#inputQuery::-ms-input-placeholder { color: var(--purple-light); }

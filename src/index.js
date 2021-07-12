@@ -15,26 +15,37 @@ import Request from './Requests'
 class App extends Component {
 	state = { ...data }
 
-	genIdString = (length=5) => Math.random().toString(16).substr(2, length)
+	getIdString = (length=5) => Math.random().toString(16).substr(2, length)
+	getUniqueProjectID = () => {
+		let newProjectID = this.genIdString()
+		while(this.state.projects.map(project => project.id).includes(newProjectID)) {
+			newProjectID = this.genIdString()
+		}
+		return newProjectID
+	}
 
 	// mock up IDs unique towards arrays
 	componentDidMount() {
+		window.addEventListener('keyup', (e) => {
+			if (e.key === 'Escape') document.getElementById('inputQuery').className = "hidden"
+		})
+
 		this.state.projects.forEach(project => {
-			let newProjectID = this.genIdString()
+			let newProjectID = this.getIdString()
 			while (this.state.projects.map(p => p.id).includes(newProjectID)) {
-				newProjectID = this.genIdString()
+				newProjectID = this.getIdString()
 			}
 			project.id = newProjectID
 			project.tasks.forEach(task => {
-				let newTaskID = this.genIdString()
+				let newTaskID = this.getIdString()
 				while (project.tasks.map(t => t.id).includes(newTaskID)) {
-					newTaskID = this.genIdString()
+					newTaskID = this.getIdString()
 				}
 				task.id = `${newProjectID}:${newTaskID}`
 				task.steps.forEach(step => {
-					let newStepID = this.genIdString()
+					let newStepID = this.getIdString()
 					while (task.steps.map(s => s.id).includes(newStepID)) {
-						newStepID = this.genIdString()
+						newStepID = this.getIdString()
 					}
 					step.id = `${newProjectID}:${newTaskID}:${newStepID}`
 				})
@@ -48,46 +59,74 @@ class App extends Component {
 		let projectID = argArray[0]
 		let taskID = argArray[1]
 		let stepID = argArray[2]
-		console.log(argArray);
+		console.log('Request ID:',request);
 
-		switch(request) {
+		this.setState(produce(this.state, draftState => {
 
-			case Request.STEP_TAG_TOGGLE_GREEN:
-			case Request.STEP_TAG_TOGGLE_YELLOW:
-			case Request.STEP_TAG_TOGGLE_ORANGE:
-			case Request.STEP_TAG_TOGGLE_PINK:
-			case Request.STEP_TAG_TOGGLE_PURPLE:
-			case Request.STEP_TOGGLE: {
-				this.setState(produce(this.state, draftState => {
-					let stepReference = draftState
-						.projects.find(p => p.id === projectID)
-							.tasks.find(task => task.id === `${projectID}:${taskID}`)
-								.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`)
-					switch (request) {
-						case Request.STEP_TOGGLE: stepReference.done = !stepReference.done; break
-						case Request.STEP_TAG_TOGGLE_PURPLE: stepReference.TAG_PRP = !stepReference.TAG_PRP; break
-						case Request.STEP_TAG_TOGGLE_PINK: stepReference.TAG_PNK = !stepReference.TAG_PNK; break
-						case Request.STEP_TAG_TOGGLE_ORANGE: stepReference.TAG_ORG = !stepReference.TAG_ORG; break
-						case Request.STEP_TAG_TOGGLE_YELLOW: stepReference.TAG_YLL = !stepReference.TAG_YLL; break
-						case Request.STEP_TAG_TOGGLE_GREEN: stepReference.TAG_GRN = !stepReference.TAG_GRN; break
-						default: break;
-					}
-				}))
-				break;
+			let projectRef, taskRef, stepRef
+
+			projectID !== undefined && (projectRef = draftState.projects.find(project => project.id === projectID))
+			taskID !== undefined && (taskRef = projectRef.tasks.find(task => task.id === `${projectID}:${taskID}`))
+			stepID !== undefined && (stepRef = taskRef.steps.find(step => step.id === `${projectID}:${taskID}:${stepID}`))
+
+			switch(request) {
+				case Request.PROJECT_DELETE: {
+					draftState.projects.filter(project => project.id !== projectID);
+					break;
+				}
+				case Request.PROJECT_RENAME: {
+					draftState.projects.find(project => project.id === projectID).name = textString
+					break
+				}
+				case Request.PROJECT_ADD: {
+					draftState.projects.push({
+						name: 'New Project',
+						id: this.getIdString(),
+						icon: 'ico',
+						dateCreated: '1.1.2001',
+						owner: 'You',
+						contributors: [],
+						tasks: [],
+					});
+					break;
+				}
+				case Request.STEP_ADD: {
+					console.log('stepadd');
+					taskRef.steps.push({
+						name: 'New Step',
+						id: `${projectID}:${taskID}:${this.getIdString()}`,
+						done: false,
+						TAG_PRP: false,
+						TAG_PNK: false,
+						TAG_ORG: false,
+						TAG_YLL: false,
+						TAG_GRN: false,
+					});
+					break;
+				}
+				case Request.STEP_DELETE: {
+					
+				}
+				case Request.STEP_RENAME: stepRef.name = textString break;
+				case Request.STEP_TOGGLE: stepRef.done = !stepRef.done; break
+				case Request.STEP_TAG_TOGGLE_PURPLE: stepRef.TAG_PRP = !stepRef.TAG_PRP; break
+				case Request.STEP_TAG_TOGGLE_PINK: stepRef.TAG_PNK = !stepRef.TAG_PNK; break
+				case Request.STEP_TAG_TOGGLE_ORANGE: stepRef.TAG_ORG = !stepRef.TAG_ORG; break
+				case Request.STEP_TAG_TOGGLE_YELLOW: stepRef.TAG_YLL = !stepRef.TAG_YLL; break
+				case Request.STEP_TAG_TOGGLE_GREEN: stepRef.TAG_GRN = !stepRef.TAG_GRN; break
+
+				default: break;
 			}
-
-			/* Other request types */
-
-			default: break;
-		}
+		}))
 	}
 
 	render() {
 		return (
 		<>
-			<Header projects={this.state.projects}/>
-			<ActionBar />
-			<ProjectView tasks={this.state.projects[0].tasks}  handle={this.handle} />
+			<Header projects={this.state.projects} handle={this.handle} />
+			<ActionBar handle={this.handle} />
+			<ProjectView tasks={this.state.projects[0].tasks} handle={this.handle} />
+			<input id="inputQuery" placeholder="..." className=""></input>
 		</>
 		)
 	}
