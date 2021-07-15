@@ -145,6 +145,14 @@ nav > button > * {
 	transition: .2s ease-in-out;
 }
 
+.row .tag:not(.selected){
+	transform: scaleX(0);
+}
+
+.row:hover .tag:not(.selected){
+	transform: scaleX(1);
+}
+
 #inputQuery.hidden {
 	transform: translate(-50%, -50%) scaleY(0) scaleX(0);
 	opacity: 0;
@@ -157,3 +165,12 @@ nav > button > * {
 #inputQuery:-ms-input-placeholder { color: var(--purple-light); }
 /* Microsoft Edge */
 #inputQuery::-ms-input-placeholder { color: var(--purple-light); }
+
+.row:not(:hover) button.hidden, .row:not(:hover) .outer {
+	display: none;
+}
+
+.row:not(:hover) svg.tag {
+	transform-origin: center;
+	transform: scale(1.2);
+}
